@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 # Parameters
 Lx = Ly = Lz = 2
 Nx = Ny = Nz = 512
+mesh = None
 Re = 1587
 Ri = 397
 Ro = 1.6
@@ -41,7 +42,7 @@ start_init_time = time.time()
 x_basis = de.Fourier('x', Nx, interval=(0, Lx), dealias=3/2)
 y_basis = de.Fourier('y', Ny, interval=(0, Ly), dealias=3/2)
 z_basis = de.Chebyshev('z', Nz, interval=(-Lz, 0), dealias=3/2)
-domain = de.Domain([x_basis, y_basis, z_basis], grid_dtype=np.float64)
+domain = de.Domain([x_basis, y_basis, z_basis], grid_dtype=np.float64, mesh=mesh)
 
 # Problem
 problem = de.IVP(domain, variables=['p','b','u','v','w','bz','uz','vz','wz'], time='t')
